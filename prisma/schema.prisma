@@ -10,9 +10,66 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())
-  authId    String  @unique  // Link to Supabase auth.users UUID
-  email     String  @unique
-  username  String
-  createdAt DateTime @default(now())
+  id              String       @id @default(uuid())
+  authId          String       @unique // Supabase UUID
+  email           String       @unique
+  username        String
+  createdAt       DateTime     @default(now())
+
+  roomMemberships RoomMember[]
+  messages        Message[]
+  ownedRooms      Room[]       @relation("RoomOwner")
 }
+
+model Room {
+  id        String       @id @default(uuid())
+  name      String       @unique
+  ownerId   String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  owner     User         @relation("RoomOwner", fields: [ownerId], references: [id])
+  members   RoomMember[]
+  messages  Message[]
+  documents Document[]
+}
+
+model RoomMember {
+  id        String     @id @default(uuid())
+  roomId    String
+  userId    String
+  role      Role
+  joinedAt  DateTime   @default(now())
+
+  room      Room       @relation(fields: [roomId], references: [id])
+  user      User       @relation(fields: [userId], references: [id])
+}
+
+model Message {
+  id        String     @id @default(uuid())
+  roomId    String
+  senderId  String
+  content   String
+  sentAt    DateTime   @default(now())
+
+  room      Room       @relation(fields: [roomId], references: [id])
+  sender    User       @relation(fields: [senderId], references: [id])
+}
+
+model Document {
+  id        String     @id @default(uuid())
+  roomId    String
+  title     String
+  content   String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  room      Room       @relation(fields: [roomId], references: [id])
+}
+
+enum Role {
+  OWNER
+  EDITOR
+  VIEWER
+}
+

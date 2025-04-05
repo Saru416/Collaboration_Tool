@@ -37,30 +37,42 @@ export default function Signup(){
             setLoading(false);
         }
     }
+    
     return(
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h2 className="mt-40 text-2xl">SignUp</h2>
-            <div className="flex flex-col">
-                <label>UserName: </label>
-                <input className="bg-white p-2 border-gray-400 border-2 rounded-xl text-black" 
-                        type="text" 
-                        placeholder="username" 
-                        value={user.username} 
-                        onChange={(e) => setUser({...user, username: e.target.value})}/>
-                <label>Email: </label>
-                <input className="bg-white p-2 border-gray-400 border-2 rounded-xl text-black" 
-                        type="text" 
-                        placeholder="email" 
-                        value={user.email} 
-                        onChange={(e) => setUser({...user, email: e.target.value})}/>
-                <label>Password: </label>
-                <input className="bg-white p-2 border-gray-400 border-2 rounded-xl text-black" 
-                        type="password" 
-                        placeholder="password" 
-                        value={user.password} 
-                        onChange={(e) => setUser({...user, password: e.target.value})}/>
-                <button className="p-2 bg-blue-500 mt-5 rounded-2xl cursor-pointer" onClick={OnSignup}>Sign Up</button>
-                <span className="mt-2">Already have an account? <Link href="/login">Login</Link></span>
+        <div className="flex items-center justify-center min-h-screen p-8">
+            <div className="border-2 border-dotted border-white p-20 rounded-2xl shadow-lg">
+                <h2 className="text-2xl text-center mb-2">WELCOME!</h2>
+                <p className="text-center mb-8">Sign up to continue...</p>
+                <div className="flex flex-col">
+                    <div className="flex m-2">
+                        <label className="mr-5">Username</label>
+                        <input className="bg-white p-2 border-gray-400 border-2 rounded-xl text-black" 
+                                type="text" 
+                                placeholder="username" 
+                                value={user.username} 
+                                onChange={(e) => setUser({...user, username: e.target.value})}/>
+                    </div>
+                    <div className="flex m-2">
+                        <label className="mr-13">Email</label>
+                        <input className="bg-white p-2 border-gray-400 border-2 rounded-xl text-black" 
+                                type="text" 
+                                placeholder="email" 
+                                value={user.email} 
+                                onChange={(e) => setUser({...user, email: e.target.value})}/>
+                    </div>
+                    <div className="flex m-2">
+                        <label className="mr-5">Password</label>
+                        <input className="bg-white p-2 border-gray-400 border-2 rounded-xl text-black" 
+                            type="password" 
+                            placeholder="password" 
+                            value={user.password} 
+                            onChange={(e) => setUser({...user, password: e.target.value})}/>
+
+                    </div>
+                    
+                    <button className="p-2 bg-white text-black mt-5 rounded-2xl cursor-pointer hover:bg-gray-200" onClick={OnSignup}>Sign Up</button>
+                    <span className="mt-4 text-center">Already have an account? <Link href="/login">Login</Link></span>
+                </div>
             </div>
         </div>
     )

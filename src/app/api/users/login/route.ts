@@ -33,12 +33,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    return NextResponse.json({
-      message: 'Login successful',
-      user,
-      token: data.session?.access_token,  // Supabase provides a JWT token
-    });
+    const token = data.session?.access_token;
+
+    const response = NextResponse.json({
+        message: 'Login successful',
+        user,
+    })
+
+    response.cookies.set('token',token!, {
+        httpOnly: true,
+        maxAge: 60*60*24*7,
+    })
+
+    return response;
   } catch (error: any) {
+    console.log(error)
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
