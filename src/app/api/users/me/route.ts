@@ -1,22 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from '@prisma/client';
-import { createClient } from '@supabase/supabase-js';
 import { getDataFromToken } from "@/helpers/getDataFromToken";
 
 const prisma = new PrismaClient();
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+
 
 export async function GET(request: NextRequest){
     try {
         const userId = await getDataFromToken(request);
-        const { data: { user } } = await supabase.auth.getUser();
+
+        const User = await prisma.user.findUnique({
+            where: { authId: userId },
+          });
+        
+        if (!User) {
+        return NextResponse.json({ error: "User not found" }, { status: 404 });
+        }
 
         const dbUser = await prisma.user.findUnique({
             where: {
-                id: userId,
+                id: User.id,
             },
         });
 

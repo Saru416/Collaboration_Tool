@@ -5,6 +5,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import socket from "@/socket";
+import Chat from "../chat/page";
 
 export default function Dashboard() {
     const router = useRouter();
@@ -93,7 +94,9 @@ export default function Dashboard() {
                     </span>
                 </div>
                 </div>
-                <div className="border-2 border-white p-20 rounded-2xl shadow-lg col-span-2 m-2"></div>
+                <div className="border-2 border-white p-20 rounded-2xl shadow-lg col-span-2 m-2">
+                    {/* <Chat roomId="room123"/> */}
+                </div>
             </div>
         </div>
     );
