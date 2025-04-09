@@ -55,6 +55,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(rooms);
   } catch (error: any) {
+    console.log(error);
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
