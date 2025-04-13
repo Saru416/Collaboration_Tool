@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { Server } from "socket.io";
-import { Server as NetServer } from "http";
 
 const prisma = new PrismaClient();
 

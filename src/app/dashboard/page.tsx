@@ -5,7 +5,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import socket from "@/socket";
-import RoomModal from "@/componnts/modals/RoomModal";
+import RoomModal from "@/components/modals/RoomModal";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -26,7 +26,6 @@ export default function Dashboard() {
     }
   };
   
-
   useEffect(() => {
     const fetchRooms = async () => {
       try {
@@ -96,7 +95,7 @@ export default function Dashboard() {
       </div>
       <div className="grid grid-cols-3 gap-4 grid-rows-4">
         <div className="border-2 border-white p-5 rounded-2xl shadow-lg col-span-2 row-span-3 m-2 flex items-center justify-center">
-          <div className="border-2 border-white p-5 rounded-2xl shadow-lg flex flex-col justify-between w-full h-full">
+          <div className="p-2 rounded-2xl shadow-lg flex flex-col justify-between w-full h-full">
             <h2 className="text-white text-xl mb-4">Your Rooms</h2>
 
             <div className="flex-1 overflow-y-auto space-y-2">

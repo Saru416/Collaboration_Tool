@@ -24,6 +24,14 @@ export async function POST(request: NextRequest) {
       },
     });    
 
+    await prisma.roomMember.create({
+      data: {
+        roomId: newRoom.id,
+        userId: user?.id || "",
+        role: "OWNER",
+      },
+    });
+
     return NextResponse.json({ message: "Room has been created", data: newRoom });
   } catch (error: any) {
     console.log(error)
@@ -48,10 +56,6 @@ export async function GET(request: NextRequest) {
         ownerId: user.id,
       },
     });
-
-    if (rooms.length === 0) {
-      return NextResponse.json({ error: "No rooms found!" }, { status: 404 });
-    }
 
     return NextResponse.json(rooms);
   } catch (error: any) {

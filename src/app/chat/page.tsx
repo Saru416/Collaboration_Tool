@@ -24,7 +24,7 @@ export default function Chat({ roomId }: { roomId: string }) {
     if (newMessage.trim() === '') return;
 
     // Emit to server
-    socket.emit('send-message', { roomId, message: newMessage });
+    //socket.emit('send-message', { roomId, message: newMessage });
 
     // Add to local state
     setMessages(prev => [...prev, { from: 'Me', message: newMessage }]);
@@ -33,14 +33,13 @@ export default function Chat({ roomId }: { roomId: string }) {
 
   return (
     <div className="p-4 border rounded-xl bg-white max-w-md mx-auto shadow-md">
-      <h2 className="text-xl font-bold mb-4">Room: {roomId}</h2>
-      <div className="h-64 overflow-y-auto border p-2 mb-4 rounded-md bg-gray-100">
+      <div className="h-80 overflow-y-auto border p-2 mb-4 rounded-md bg-gray-100">
         {messages.map((msg, index) => (
           <div
             key={index}
             className={`mb-2 ${msg.from === 'Me' ? 'text-right' : 'text-left'}`}
           >
-            <span className=" bg-blue-200 inline-block px-3 py-1 rounded-lg">
+            <span className={ `${msg.from === 'Me' ? 'bg-blue-500' : 'bg-white text-black'} inline-block px-3 py-1 rounded-lg`}>
               <strong>{msg.from}:</strong> {msg.message}
             </span>
           </div>

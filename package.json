@@ -10,6 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.30.8",
+    "@editorjs/header": "^2.8.8",
+    "@editorjs/list": "^2.0.6",
+    "@editorjs/simple-image": "^1.6.0",
     "@prisma/client": "^6.5.0",
     "@supabase/supabase-js": "^2.49.4",
     "axios": "^1.8.4",

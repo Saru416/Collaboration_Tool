@@ -7,7 +7,7 @@ export async function POST(request: NextRequest,
     {params} : {params: {roomId : string}}
 ){
     try {
-        const {roomId} = params;
+        const {roomId} = await params;
         const {title, content} = await request.json();
 
         const document = await prisma.document.create({
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest,
 export async function GET(request: NextRequest,
     {params}: {params: {roomId: string}}){
     try {
-        const {roomId} = params
+        const {roomId} = await params;
         const documents = await prisma.document.findMany({
             where: {
                 roomId: roomId

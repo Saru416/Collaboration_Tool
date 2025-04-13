@@ -1,7 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { getDataFromToken } from "@/helpers/getDataFromToken";
-import { Role } from "@prisma/client";
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient, Role } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -45,9 +44,9 @@ export async function GET(
     { params }: { params: { roomId: string } }
   ){
     try {
-        const {roomId} = params;
+        const {roomId} = await params;
 
-        const members = await prisma.roomMember.find({
+        const members = await prisma.roomMember.findMany({
             where: {
                 roomId: roomId
             }
